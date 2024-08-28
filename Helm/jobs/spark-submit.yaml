@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: spark-submit
+spec:
+  template:
+    metadata:
+      name: spark-submit
+    spec:
+      containers:
+      - name: spark-submit
+        image: armdocker.rnd.ericsson.se/aia_releases/spark:v2.1.0
+        command: [ "/opt/spark/bin/spark-submit" ]
+        args: [ "--conf", "spark.serializer=org.apache.spark.serializer.KryoSerializer", "--class", "com.ericsson.component.aia.services.bps.engine.service.BPSPipeLineExecuter", "--master", "spark://spark-aia:7077", "file:///var/lib/spark/asrl-all-in-one-correlation-1.3.9.jar", "/var/lib/spark/asr-flow.xml" ]
+        volumeMounts:
+        - name: spark-nfs
+          mountPath: /var/lib/spark
+      volumes:
+      - name: spark-nfs
+        persistentVolumeClaim:
+          claimName: nfs
+      restartPolicy: Never

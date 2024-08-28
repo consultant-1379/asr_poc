@@ -1,0 +1,14 @@
+
+kafka:
+   zookeeper:
+      clientServiceName: "zk-csvc-aia"
+      clientPort: "2181"
+   configurationOverrides:
+      "default.replication.factor": 3
+      "log.retention.hours": 1
+
+schemaregistry:
+   zookeeper:
+      clientServiceName: "zk-csvc-aia"
+      clientPort: "2181"
+

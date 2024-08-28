@@ -1,0 +1,7 @@
+apiVersion: v1
+description: AIA ASR Poc
+name: asr-poc
+version: 0.0.1
+maintainers:
+  - name: AIA
+    email: PDLCOREAIA@pdl.internal.ericsson.com

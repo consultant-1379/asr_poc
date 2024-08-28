@@ -1,0 +1,11 @@
+# used for verification
+bootstrap.servers=kafka-broker-aia:9092
+group.id=3
+enable.auto.commit=true
+auto.commit.interval.ms=1000
+session.timeout.ms=30000
+key.deserializer=org.apache.kafka.common.serialization.StringDeserializer
+value.deserializer=com.ericsson.component.aia.common.avro.kafka.decoder.KafkaGenericRecordDecoder
+test.topic=AIA_RC_
+test.NumberOfThreads=2
+auto.offset.reset=latest

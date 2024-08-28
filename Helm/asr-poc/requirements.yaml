@@ -1,0 +1,20 @@
+dependencies:
+- name: kafka
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-helm-dev-generic-local/aia/kafka
+  version: ">0.0.0"
+- name: zookeeper
+  repository: https://arm.rnd.ki.sw.ericsson.se/artifactory/proj-adp-helm-dev-generic-local/aia/zookeeper
+  version: ">0.0.0"
+- name: schemaregistry
+  repository: https://armdocker.rnd.ericsson.se/artifactory/proj-helm_aia-generic-local/releases/schemaregistry
+  version: ">0.0.0"
+- name: stream-terminator
+  repository: https://armdocker.rnd.ericsson.se/artifactory/proj-helm_aia-generic-local/snapshots/stream-terminator
+  version: ">0.0.0"
+- name: eps-parser
+  repository: https://armdocker.rnd.ericsson.se/artifactory/proj-helm_aia-generic-local/snapshots/eps-parser
+  version: ">0.0.0"
+- name: spark
+  repository: https://armdocker.rnd.ericsson.se/artifactory/proj-helm_aia-generic-local/releases/spark
+  version: ">0.0.0"
+ 

@@ -1,0 +1,48 @@
+
+<FlowDefinition xmlns="urn:com:ericsson:schema:xml:oss:fbp_flow" xmlns:oc="urn:com:ericsson:schema:xml:oss:oss_common" oc:name="CSLSolutionSet" oc:ns="com.ericsson.oss.services" oc:version="1.0.0">
+
+  <oc:modelCreationInfo author="eachsaj" creationDate="25/5/2016">
+    <oc:designedModel componentId="BatchProcessingSpark" />
+  </oc:modelCreationInfo>
+
+  <oc:desc>ExtEps Test for an extension Simple Batch Processing</oc:desc>
+
+  <input name="kafka-esi-input">
+    <attribute name="bootstrap.servers" value="kafka-broker-aia:9092" />
+      <attribute name="group.id" value="calldrop" />
+    <attribute name="uri" value="kafka://AIA_EPS_OUT_" />
+    <attribute name="window.length" value="1000" />
+    <attribute name="slide.window.length" value="1000" />
+    <attribute name="schemaRegistry.address" value="http://sr-aia:8081" />
+    <attribute name="key.deserializer" value="org.apache.kafka.common.serialization.StringDeserializer" />
+    <attribute name="value.deserializer" value="com.ericsson.component.aia.services.bps.spark.common.avro.BpsKafkaGenericRecordDecoder" />
+    <attribute name="max.poll.records" value="1147483647" />
+    <attribute name="check.crcs" value="false" />
+  </input>
+
+  <output name="kafka-out-put">
+
+
+     <attribute name="uri" value="kafka://AIA_RC_?format=avro" />
+    <attribute name="bootstrap.servers" value="kafka-broker-aia:9092" />
+    <attribute name="eventType" value="correlation.BASE_ASR" />
+    <attribute name="valueClass" value="com.ericsson.component.aia.common.avro.kafka.encoder.KafkaGenericRecordEncoder" />
+    <attribute name="value.serializer" value="com.ericsson.component.aia.common.avro.kafka.encoder.KafkaGenericRecordEncoder" />
+    <attribute name="schemaRegistry.address" value="http://sr-aia:8081" />
+  </output>
+
+  <step name="cell-analysis">
+    <attribute name="uri" value="spark-streaming://cell-analysis" />
+     <attribute name="app.name" value="cell-analysis_1" />
+       <attribute name="schemaRegistry.address" value="http://sr-aia:8081" />
+    <attribute name="driver-class" value="com.ericsson.oss.mediation.asrl.correlation.ASRBaseCorrelation" />
+  <attribute name="streaming.checkpoint" value="/var/lib/spark/checkpoint/" /></step>
+
+  <path>
+    <from uri="kafka-esi-input" />
+    <to uri="cell-analysis" />
+    <to uri="file-output" />
+  </path>
+
+</FlowDefinition>
+
